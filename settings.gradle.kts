@@ -1,0 +1,1 @@
+rootProject.name = "wise_level8_ntm"
