@@ -35,7 +35,7 @@ public class Main {
 
                 for(int i = list.size(); i > 0; i--){
                     WiseSaying wise = list.get(i - 1);
-                    System.out.println(wise.num() + " / " + wise.auth() + " / " + wise.line());
+                    System.out.println(wise.getNum() + " / " + wise.getAuth() + " / " + wise.getLine());
                 }
             }else if(answer.startsWith("삭제?id=")){
                 if(list.isEmpty()){
@@ -47,7 +47,7 @@ public class Main {
                         boolean isFound = false;
 
                         for (WiseSaying wise : list) {
-                            if (wise.num() == num) {
+                            if (wise.getNum() == num) {
                                 list.remove(wise);
                                 System.out.println(num + "번 명언이 삭제되었습니다.");
                                 isFound = true;
@@ -74,16 +74,15 @@ public class Main {
                         for(int i = 0; i < list.size(); i++){
                             WiseSaying wise = list.get(i);
 
-                            if(wise.num() == num){
-                                System.out.println("기존 명언: " + wise.line());
+                            if(wise.getNum() == num){
+                                System.out.println("기존 명언: " + wise.getLine());
                                 System.out.print("새 명언: ");
-                                String line = scan.nextLine();
+                                wise.setLine(scan.nextLine());
 
-                                System.out.println("기존 작가: " + wise.auth());
+                                System.out.println("기존 작가: " + wise.getAuth());
                                 System.out.print("새 작가: ");
-                                String auth = scan.nextLine();
+                                wise.setAuth(scan.nextLine());
 
-                                list.set(i, wise.wither(line, auth));
                                 System.out.println(num + "번 명언이 수정되었습니다.");
                                 isFound = true;
                                 break;
@@ -107,8 +106,45 @@ public class Main {
     }
 }
 
-record WiseSaying(int num, String line, String auth){
-    WiseSaying wither(String line, String auth){
-        return new WiseSaying(this.num, line, auth);
+class WiseSaying{
+    private int num;
+    private String line;
+    private String auth;
+
+    WiseSaying(){}
+    WiseSaying(int num, String line, String auth){
+        this.num = num;
+        this.line = line;
+        this.auth = auth;
+    }
+
+    public String getAuth() {
+        return auth;
+    }
+
+    public void setAuth(String auth) {
+        this.auth = auth;
+    }
+
+    public String getLine() {
+        return line;
+    }
+
+    public void setLine(String line) {
+        this.line = line;
+    }
+
+    public int getNum() {
+        return num;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
     }
 }
+
+//record WiseSaying(int num, String line, String auth){
+//    WiseSaying wither(String line, String auth){
+//        return new WiseSaying(this.num, line, auth);
+//    }
+//}
