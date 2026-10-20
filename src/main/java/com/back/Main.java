@@ -56,7 +56,7 @@ public class Main {
                         }
 
                         if (!isFound) {
-                            System.out.println("없는 번호입니다.");
+                            System.out.println(num + "번 명언은 존재하지 않습니다.");
                         }
                     } catch(NumberFormatException e){
                         System.out.println("번호만 입력하세요.");
@@ -91,7 +91,7 @@ public class Main {
                         }
 
                         if (!isFound) {
-                            System.out.println("없는 번호입니다.");
+                            System.out.println(num + "번 명언은 존재하지 않습니다.");
                         }
                     }catch (NumberFormatException e){
                         System.out.println("번호만 입력하세요.");
