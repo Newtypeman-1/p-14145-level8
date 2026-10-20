@@ -143,8 +143,24 @@ class WiseSaying{
     }
 }
 
-//record WiseSaying(int num, String line, String auth){
-//    WiseSaying wither(String line, String auth){
-//        return new WiseSaying(this.num, line, auth);
-//    }
-//}
+class Rq{
+    private String action;
+    private String param;
+
+    Rq() {}
+    Rq(String answer){
+        this.param = 
+        this.action = answer.substring(0,1);
+    }
+
+    String getAction(){
+        return action;
+    }
+
+    int getParam(){
+        return param;
+    }
+
+
+
+}
