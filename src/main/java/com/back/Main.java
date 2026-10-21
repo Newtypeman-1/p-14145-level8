@@ -104,8 +104,10 @@ public class Main {
                         }
                     }
                 }
-                case "종료" ->
+                case "종료" ->{
                         System.out.println("시스템을 종료합니다.");
+                        return;
+                }
                 default ->
                         System.out.println("잘못된 입력입니다.");
             }
@@ -165,20 +167,23 @@ class Rq{
         String expression = "\\?";
 
         //입력을 명령 + 패러미터로 분할
-        //최대 2칸 배열(limit:2)로 반환되나, ?가 없는 명령(등록, 목록, 혹은 잘못된 입력)이면 1칸 배열로 반환됨
+        //최대 2칸 배열(limit:2)로 반환되나, ?가 없는 명령(등록, 목록)이면 1칸 배열로 반환됨
         String[] urlDivides = answer.split(expression, 2);
 
         //명령을 저장
         actionName = urlDivides[0];
 
-        //배열이 2칸일 경우(수정 혹은 삭제 명령일 경우)
+        //2칸 배열일 경우(수정 혹은 삭제 명령일 경우)
         if(urlDivides.length > 1){
             //key=value 형태로 된 패러미터를 =를 기준으로 분할
             String[] params = urlDivides[1].split("=",2);
 
-            //분할된 양 값을 key/value 쌍으로 저장
-            //value가 없을 경우 params[1]의 값은 ""
-            paramMap.put(params[0], params[1]);
+            //=가 없는 잘못된 입력일 경우 params는 1칸
+            if(params.length > 1){
+                //분할된 양 값을 key/value 쌍으로 저장
+                //value가 없을 경우 params[1]의 값은 ""
+                paramMap.put(params[0], params[1]);
+            }
         }
     }
 
