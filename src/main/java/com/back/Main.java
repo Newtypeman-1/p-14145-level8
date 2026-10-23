@@ -1,6 +1,7 @@
 package com.back;
 
 import java.util.*;
+import java.util.stream.IntStream;
 
 public class Main {
     static void main(String[] args){
@@ -40,7 +41,7 @@ public class Main {
                 }
                 case "수정" -> {
                     if(list.isEmpty()) System.out.println("수정할 명언이 없습니다.");
-                    else{
+                    else {
                         int i = rq.getParamAsInt("id", -1);
                         if(i < 0){
                             System.out.println("수정할 명언의 번호를 정확히 입력하세요.");
@@ -77,11 +78,17 @@ public class Main {
                     if(list.isEmpty()) System.out.println("삭제할 명언이 없습니다.");
                     else{
                         int i = rq.getParamAsInt("id", -1);
+                        if(i < 0){
+                            System.out.println("삭제할 명언의 번호를 정확히 입력하세요.");
+                            break;
+                        }
                         boolean isFound = list.removeIf(
                                 wise -> wise.num() == i);
-                        if(!isFound) System.out.printf("%d번 명언이 존재하지 않습니다.\n"
-                                .formatted(i));
-                        else System.out.printf("%d번 명언을 삭제했습니다.\n"
+                        if(!isFound)
+                            System.out.printf("%d번 명언이 존재하지 않습니다.\n"
+                                    .formatted(i));
+                        else
+                            System.out.printf("%d번 명언을 삭제했습니다.\n"
                                 .formatted(i));
                     }
                 }
