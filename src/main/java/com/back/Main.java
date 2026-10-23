@@ -53,6 +53,24 @@ public class Main {
                                 .findAny()
                                 .orElse(-1);
 
+                        if(listIndexOfWise < 0)
+                            System.out.printf("%d번 명언이 존재하지 않습니다.\n"
+                                    .formatted(i));
+                        else{
+                            WiseSaying wise = list.get(listIndexOfWise);
+
+                            System.out.println("기존 명언: " + wise.line());
+                            System.out.print("새 명언: ");
+                            String line = scan.nextLine().trim();
+                            System.out.println("기존 작가: " + wise.auth());
+                            System.out.print("새 작가: ");
+                            String auth = scan.nextLine().trim();
+
+                            WiseSaying newWise = new WiseSaying(wise.num(), line, auth);
+                            list.set(listIndexOfWise, newWise);
+                            System.out.printf("%d번 명언이 수정되었습니다.\n"
+                                    .formatted(i));
+                        }
                     }
                 }
                 case "삭제" -> {
