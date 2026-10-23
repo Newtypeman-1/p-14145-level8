@@ -42,6 +42,16 @@ public class Main {
                     if(list.isEmpty()) System.out.println("수정할 명언이 없습니다.");
                     else{
                         int i = rq.getParamAsInt("id", -1);
+                        if(i < 0){
+                            System.out.println("수정할 명언의 번호를 정확히 입력하세요.");
+                            break;
+                        }
+
+                        int listIndexOfWise = IntStream
+                                .range(0, list.size())
+                                .filter(item -> list.get(item).num() == i)
+                                .findAny()
+                                .orElse(-1);
 
                     }
                 }
