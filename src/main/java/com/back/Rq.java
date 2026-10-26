@@ -1,7 +1,9 @@
 package com.back;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Rq{
     private final String actionName;
@@ -15,12 +17,17 @@ public class Rq{
 
         if(cmdBits.length > 1 && !cmdBits[1].isEmpty()){
             String[] paramBits = cmdBits[1].split("&");
-            for(String bit : paramBits){
-                String[] params = bit.split("=", 2);
-                if(params.length == 2 && !params[1].isEmpty()){
-                    paramMap.put(params[0], params[1]);
-                }
-            }
+
+            Map<String, String> parsedItems =
+                    Arrays.stream(paramBits)
+                        .map(bit -> bit.split("=", 2))
+                        .filter(params -> params.length == 2 && !params[1].isEmpty())
+                        .collect(Collectors.toMap(
+                                params -> params[0],
+                                 params-> params[1],
+                                (oldValue, newValue) -> newValue
+                        ));
+            paramMap.putAll(parsedItems);
         }
     }
 
